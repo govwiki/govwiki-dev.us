@@ -363,7 +363,7 @@ render_tabs = (initial_layout, data, tabset, parent) ->
                 'tooltip':
                  'textStyle':
                   'fontSize': 12
-                'width': bigChartWidth
+                'width': smallChartWidth
                 'height': 300
                 'isStacked': 'true'
                 'colors': ['#005ce6', '#009933']
@@ -404,7 +404,7 @@ render_tabs = (initial_layout, data, tabset, parent) ->
                 'tooltip':
                  'textStyle':
                   'fontSize': 12
-                'width': bigChartWidth
+                'width': smallChartWidth
                 'height': 300
                 'isStacked': 'true'
                 'colors': ['#005ce6', '#009933']
