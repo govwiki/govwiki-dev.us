@@ -127,7 +127,7 @@ add_marker =(rec)->
     lat: rec.latitude
     lng: rec.longitude
     icon: get_icon(rec.gov_type)
-    title:  "#{rec.gov_name}, #{rec.gov_type} (#{rec.latitude}, #{rec.longitude})"
+    title:  "#{rec.gov_name}, #{rec.gov_type}"
     infoWindow:
       content: create_info_window rec
     click: (e)->

@@ -202,6 +202,12 @@ render_tabs = (initial_layout, data, tabset, parent) ->
             graph = false
           if data['median_benefits_general_public'] == 0
             graph = false
+          smallChartWidth = 340
+          bigChartWidth = 470
+
+          if $(window).width() < 490
+            smallChartWidth = 300
+            bigChartWidth = 300
           drawChart = () ->
             setTimeout ( ->
               vis_data = new google.visualization.DataTable()
@@ -230,7 +236,7 @@ render_tabs = (initial_layout, data, tabset, parent) ->
                 'tooltip':
                  'textStyle':
                   'fontSize': 12
-                'width': 340
+                'width': smallChartWidth
                 'height': 300
                 'isStacked': 'true'
                 'colors': ['#005ce6', '#009933']
@@ -267,7 +273,7 @@ render_tabs = (initial_layout, data, tabset, parent) ->
                 'tooltip':
                  'textStyle':
                   'fontSize': 12
-                'width': 340
+                'width': smallChartWidth
                 'height': 300
                 'bar': {
                  'groupWidth': '30%'
@@ -314,7 +320,7 @@ render_tabs = (initial_layout, data, tabset, parent) ->
                 'tooltip':
                  'textStyle':
                   'fontSize': 12
-                'width': 340
+                'width': smallChartWidth
                 'height': 300
                 'is3D' : 'true'
                 'colors': ['#005ce6', '#009933']
@@ -357,7 +363,7 @@ render_tabs = (initial_layout, data, tabset, parent) ->
                 'tooltip':
                  'textStyle':
                   'fontSize': 12
-                'width': 470
+                'width': bigChartWidth
                 'height': 300
                 'isStacked': 'true'
                 'colors': ['#005ce6', '#009933']
@@ -398,7 +404,7 @@ render_tabs = (initial_layout, data, tabset, parent) ->
                 'tooltip':
                  'textStyle':
                   'fontSize': 12
-                'width': 470
+                'width': bigChartWidth
                 'height': 300
                 'isStacked': 'true'
                 'colors': ['#005ce6', '#009933']
@@ -448,7 +454,7 @@ render_tabs = (initial_layout, data, tabset, parent) ->
                 'tooltip':
                  'textStyle':
                   'fontSize': 12
-                'width': 470
+                'width': bigChartWidth
                 'height': 350
                 'pieStartAngle': 60
                 'sliceVisibilityThreshold': .05
@@ -496,7 +502,7 @@ render_tabs = (initial_layout, data, tabset, parent) ->
                 'tooltip':
                  'textStyle':
                   'fontSize': 12
-                'width': 470
+                'width': bigChartWidth
                 'height': 350
                 'pieStartAngle': 60
                 'sliceVisibilityThreshold': .05

@@ -52,7 +52,7 @@
       </div>
       <!-- MAP-->
       <div style="margin-bottom:100px;" class="row">
-        <div style="padding:0;" class="col-sm-6">
+        <div style="padding:0;" class="col-sm-9">
           <div id="maparea" style="border:1px solid #e1e1e1;margin-left:10px;">
             <div id="govmap"></div>
             <!-- Controls to show results of geocoding-->
@@ -67,7 +67,7 @@
             -->
           </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-3">
           <div id="intro-text"></div>
           <!--include right_panel.html-->
         </div>
@@ -121,7 +121,7 @@
 <script id="tabpanel-template" type="text/x-handlebars-template">
 	<div id="details">
     <div style="min-height:60px;">
-      <div style="text-align:right; min-height:48px;" class="pull-right">
+      <div style="text-align:right; min-height:48px;" class="pull-right top-links-wrapper">
         {{#if wikipedia_page_name}}
             <a  target="_blank" href="{{wikipedia_page_name}}">
               Open Wikipedia article
@@ -141,7 +141,7 @@
             </a>
         {{/if}}
       </div>
-      <h3 style="text-transform:uppercase;padding:0; margin:0;">{{{title}}}</h3>
+      <h3 class="county-title" style="text-transform:uppercase;padding:0; margin:0;">{{{title}}}</h3>
     </div>
     <div class="tabpanel">
 			<ul id="fieldTabs" class="nav nav-pills" role="tablist">

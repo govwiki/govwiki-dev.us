@@ -164,7 +164,8 @@ LGR = #DDD
 
 #govmap
   //height:550px
-  min-height: 610px;
+  //min-height: 610px;
+  min-height: 915px
   //max-width:600px
   width:100%
   margin-left:auto
@@ -484,6 +485,23 @@ span.rank
     
     #details{
       margin-top: 50px;
+      margin-bottom: 0
+    }
+    .top-links-wrapper{
+      float: none !important;
+      text-align: center !important;
+    }
+    .county-title{
+      clear: both
+      text-align: center
+      margin-bottom: 15px !important
+    }
+    #fieldTabs{
+      text-align: center
+      &>li{
+        float: none
+        display: inline-block
+      }
     }
     #median-comp-graph{
       float: left;
@@ -510,4 +528,21 @@ span.rank
       float: left;
       margin-left: -20px;
     }
+    .f-nam{
+      min-width 100%
+      margin-right: 0
+    }
+    .f-val {
+      margin-left: 0
+      min-width: 0
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 530px){
+  .top-links-wrapper{
+    a{
+      display: block
+      margin-bottom: 10px
+    }
+  }
 }
