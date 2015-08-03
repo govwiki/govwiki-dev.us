@@ -34,6 +34,9 @@ render_field_value = (n,mask,data) ->
       if v.length > 20 and
       n == "open_enrollment_schools"
       then v = v.substring(0, 19) + "<div style='display:inline;color:#074d71'  title='#{v}'>&hellip;</div>"
+      if v.length > 20 and
+      n == "parent_trigger_eligible_schools"
+      then v = v.substring(0, 19) + "<div style='display:inline;color:#074d71'  title='#{v}'>&hellip;</div>"
       else
         if v.length > 21
         then v = v.substring(0, 21)
@@ -450,7 +453,7 @@ render_tabs = (initial_layout, data, tabset, parent) ->
               options =
                 'title':'Total Revenues'
                 'titleTextStyle':
-                 'fontSize': 12
+                 'fontSize': 16
                 'tooltip':
                  'textStyle':
                   'fontSize': 12
@@ -498,7 +501,7 @@ render_tabs = (initial_layout, data, tabset, parent) ->
               options =
                 'title':'Total Expenditures'
                 'titleTextStyle':
-                 'fontSize': 12
+                 'fontSize': 16
                 'tooltip':
                  'textStyle':
                   'fontSize': 12
