@@ -5,7 +5,7 @@ map = new GMaps
   el: '#govmap'
   lat: 37
   lng: -119
-  zoom: 6
+  zoom: 7
   minZoom: 6
   scrollwheel: true
   panControl: false
