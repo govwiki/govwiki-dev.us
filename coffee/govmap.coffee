@@ -3,9 +3,9 @@ bounds_timeout=undefined
 
 map = new GMaps
   el: '#govmap'
-  lat: 37
-  lng: -119
-  zoom: 7
+  lat: 37.3
+  lng: -119.3
+  zoom: 6
   minZoom: 6
   scrollwheel: true
   panControl: false
