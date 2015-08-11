@@ -42,67 +42,6 @@ active_tab=""
 $.get "texts/intro-text.html", (data) ->
   $("#intro-text").html data
 
-# fire client-side URL routing
-router = new Grapnel
-router.get ':id', (req) ->
-  id = req.params.id
-  console.log "ROUTER ID=#{id}"
-  get_elected_officials = (gov_id, limit, onsuccess) ->
-    $.ajax
-      url:"http://46.101.3.79:80/rest/db/elected_officials"
-      data:
-        filter:"govs_id=" + gov_id
-        fields:"govs_id,title,full_name,email_address,photo_url,term_expires"
-        app_name:"govwiki"
-        order:"display_order"
-        limit:limit
-
-      dataType: 'json'
-      cache: true
-      success: onsuccess
-      error:(e) ->
-        console.log e
-  if isNaN(id)
-    id = id.replace(/_/g,' ')
-    build_data = (id, limit, onsuccess) ->
-      $.ajax
-        url:"http://46.101.3.79:80/rest/db/govs"
-        data:
-          filter:"alt_name='#{id}'"
-          app_name:"govwiki"
-        dataType: 'json'
-        cache: true
-        success: (data) ->
-          elected_officials = get_elected_officials data.record[0]._id, 25, (elected_officials_data, textStatus, jqXHR) ->
-            gov_id = data.record[0]._id
-            data = new Object()
-            data._id = gov_id
-            data.elected_officials = elected_officials_data
-            data.gov_name = ""
-            data.gov_type = ""
-            data.state = ""
-            $('#details').html templates.get_html(0, data)
-            get_record2 data._id
-            activate_tab()
-            GOVWIKI.show_data_page()
-            return
-        error:(e) ->
-          console.log e
-    build_data(id)
-  else
-    elected_officials = get_elected_officials id, 25, (elected_officials_data, textStatus, jqXHR) ->
-      data = new Object()
-      data._id = id
-      data.elected_officials = elected_officials_data
-      data.gov_name = ""
-      data.gov_type = ""
-      data.state = ""
-      $('#details').html templates.get_html(0, data)
-      get_record2 data._id
-      activate_tab()
-      GOVWIKI.show_data_page()
-      return
-
 
 GOVWIKI.get_counties = get_counties = (callback) ->
   $.ajax
@@ -389,7 +328,107 @@ window.onhashchange = (e) ->
 # =====================================================================
 
 #templates.load_template "tabs", "config/tablayout.json"
-templates.load_fusion_template "tabs", "https://www.googleapis.com/fusiontables/v2/query?sql=SELECT%20*%20FROM%201z2oXQEYQ3p2OoMI8V5gKgHWB5Tz990BrQ1xc1tVo&key=AIzaSyCXDQyMDpGA2g3Qjuv4CDv7zRj-ix4IQJA"
+
+
+# fire client-side URL routing
+
+router = new Grapnel
+
+router.get ':id/:user_id', (req, event) ->
+    user_id = req.params.user_id
+    templates.load_fusion_template "tabs", "https://www.googleapis.com/fusiontables/v2/query?sql=SELECT%20*%20FROM%201z2oXQEYQ3p2OoMI8V5gKgHWB5Tz990BrQ1xc1tVo&key=AIzaSyCXDQyMDpGA2g3Qjuv4CDv7zRj-ix4IQJA"
+    $.ajax
+        url:"http://46.101.3.79:80/rest/db/elected_officials"
+        data:
+            filter: "elected_official_id=" + user_id
+            app_name:"govwiki"
+            limit: 25
+        dataType: 'json'
+        cache: true
+        success: (data) ->
+            tpl = $('#person-info-template').html()
+            compiledTemplate = Handlebars.compile(tpl)
+            html = compiledTemplate(data.record[0])
+            $('#searchContainer').html html
+
+            $('.vote').on 'click', (e) ->
+                id = e.currentTarget.id
+                $('#conversation').modal 'show'
+                reset id, 'http://govwiki.us' + '/' + id, id
+
+        error:(e) ->
+            console.log e
+
+# Refresh Disqus thread
+reset = (newIdentifier, newUrl, newTitle) ->
+    DISQUS.reset
+        reload: true,
+        config: () ->
+            this.page.identifier = newIdentifier
+            this.page.url = newUrl
+            this.page.title = newTitle
+
+router.get ':id', (req, event) ->
+    id = req.params.id
+    templates.load_fusion_template "tabs", "https://www.googleapis.com/fusiontables/v2/query?sql=SELECT%20*%20FROM%201z2oXQEYQ3p2OoMI8V5gKgHWB5Tz990BrQ1xc1tVo&key=AIzaSyCXDQyMDpGA2g3Qjuv4CDv7zRj-ix4IQJA"
+    console.log "ROUTER ID=#{id}"
+    get_elected_officials = (gov_id, limit, onsuccess) ->
+        $.ajax
+            url:"http://46.101.3.79:80/rest/db/elected_officials"
+            data:
+                filter:"govs_id=" + gov_id
+                app_name:"govwiki"
+                order:"display_order"
+                limit:limit
+
+            dataType: 'json'
+            cache: true
+            success: onsuccess
+            error:(e) ->
+                console.log e
+    if isNaN(id)
+        id = id.replace(/_/g,' ')
+        build_data = (id, limit, onsuccess) ->
+            $.ajax
+                url:"http://46.101.3.79:80/rest/db/govs"
+                data:
+                    filter:"alt_name='#{id}'"
+                    app_name:"govwiki"
+                dataType: 'json'
+                cache: true
+                success: (data) ->
+                    elected_officials = get_elected_officials data.record[0]._id, 25, (elected_officials_data, textStatus, jqXHR) ->
+                        gov_id = data.record[0]._id
+                        data = new Object()
+                        data._id = gov_id
+                        data.elected_officials = elected_officials_data
+                        data.gov_name = ""
+                        data.gov_type = ""
+                        data.state = ""
+                        $('#details').html templates.get_html(0, data)
+                        get_record2 data._id
+                        activate_tab()
+                        GOVWIKI.show_data_page()
+                        return
+                error:(e) ->
+                    console.log e
+        build_data(id)
+    else
+        elected_officials = get_elected_officials id, 25, (elected_officials_data, textStatus, jqXHR) ->
+            data = new Object()
+            data._id = id
+            data.elected_officials = elected_officials_data
+            data.gov_name = ""
+            data.gov_type = ""
+            data.state = ""
+            $('#details').html templates.get_html(0, data)
+            get_record2 data._id
+            activate_tab()
+            GOVWIKI.show_data_page()
+            return
+
+router.get '', (req, event) ->
+    templates.load_fusion_template "tabs", "https://www.googleapis.com/fusiontables/v2/query?sql=SELECT%20*%20FROM%201z2oXQEYQ3p2OoMI8V5gKgHWB5Tz990BrQ1xc1tVo&key=AIzaSyCXDQyMDpGA2g3Qjuv4CDv7zRj-ix4IQJA"
 
 build_selector('.state-container' , 'State..' , '{"distinct": "govs","key":"state"}' , 'state_filter')
 build_selector('.gov-type-container' , 'type of government..' , '{"distinct": "govs","key":"gov_type"}' , 'gov_type_filter')

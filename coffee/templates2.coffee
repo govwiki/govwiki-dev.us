@@ -181,6 +181,7 @@ render_tabs = (initial_layout, data, tabset, parent) ->
     switch tab.name
       when 'Overview + Elected Officials'
         detail_data.tabcontent += render_fields tab.fields, data, templates['tabdetail-namevalue-template']
+        console.log(data.elected_officials.record)
         for official,i in data.elected_officials.record
           official_data =
             title: if '' != official.title then "Title: " + official.title
@@ -188,6 +189,8 @@ render_tabs = (initial_layout, data, tabset, parent) ->
             email: if null != official.email_address then "Email: " + official.email_address
             telephonenumber: if null != official.telephone_number and undefined != official.telephone_number then "Telephone Number: " + official.telephone_number
             termexpires: if null != official.term_expires then "Term Expires: " + official.term_expires
+            govs_id: official.govs_id
+            elected_official_id: official.elected_official_id
 
           if '' != official.photo_url and official.photo_url != null then official_data.image =  '<img src="'+official.photo_url+'" class="portrait" alt="" />'
           detail_data.tabcontent += templates['tabdetail-official-template'](official_data)
@@ -341,7 +344,7 @@ render_tabs = (initial_layout, data, tabset, parent) ->
         #fin-health-revenue graph
         if not plot_handles['fin-health-revenue-graph'] and data['alt_type'] != 'School District'
           graph = true
-          console.log '###al'+JSON.stringify data
+          #console.log '###al'+JSON.stringify data
           if data['total_revenue_per_capita'] == 0
             graph = false
           drawChart = () ->
@@ -640,7 +643,7 @@ class Templates2
   constructor:() ->
     @list = []
     @events = {}
-    templateList = ['tabpanel-template', 'tabdetail-template', 'tabdetail-namevalue-template', 'tabdetail-finstatement-template', 'tabdetail-official-template', 'tabdetail-employee-comp-template', 'tabdetail-financial-health-template', 'tabdetail-financial-statements-template']
+    templateList = ['tabpanel-template', 'tabdetail-template', 'tabdetail-namevalue-template', 'tabdetail-finstatement-template', 'tabdetail-official-template', 'tabdetail-employee-comp-template', 'tabdetail-financial-health-template', 'tabdetail-financial-statements-template', 'person-info-template']
     templatePartials = ['tab-template']
     @templates = {}
     for template,i in templateList
