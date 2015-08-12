@@ -335,29 +335,40 @@ window.onhashchange = (e) ->
 router = new Grapnel
 
 router.get ':id/:user_id', (req, event) ->
+    gov_id = req.params.id.substr(0)
     user_id = req.params.user_id
     templates.load_fusion_template "tabs", "https://www.googleapis.com/fusiontables/v2/query?sql=SELECT%20*%20FROM%201z2oXQEYQ3p2OoMI8V5gKgHWB5Tz990BrQ1xc1tVo&key=AIzaSyCXDQyMDpGA2g3Qjuv4CDv7zRj-ix4IQJA"
     $.ajax
-        url:"http://46.101.3.79:80/rest/db/elected_officials"
+        url:"http://46.101.3.79:80/rest/db/govs"
         data:
-            filter: "elected_official_id=" + user_id
+            filter: "_id=" + gov_id
+            fields: "gov_name"
             app_name:"govwiki"
-            limit: 25
-        dataType: 'json'
-        cache: true
         success: (data) ->
-            tpl = $('#person-info-template').html()
-            compiledTemplate = Handlebars.compile(tpl)
-            html = compiledTemplate(data.record[0])
-            $('#searchContainer').html html
+            gov_name = data.record[0].gov_name
+            do (gov_name) =>
+                $.ajax
+                    url:"http://46.101.3.79:80/rest/db/elected_officials"
+                    data:
+                        filter: "elected_official_id=" + user_id
+                        app_name:"govwiki"
+                        limit: 25
+                    dataType: 'json'
+                    cache: true
+                    success: (data) ->
+                        person = data.record[0]
+                        person.gov_name = gov_name
+                        tpl = $('#person-info-template').html()
+                        compiledTemplate = Handlebars.compile(tpl)
+                        html = compiledTemplate(person)
+                        $('#searchContainer').html html
 
-            $('.vote').on 'click', (e) ->
-                id = e.currentTarget.id
-                $('#conversation').modal 'show'
-                reset id, 'http://govwiki.us' + '/' + id, id
-
-        error:(e) ->
-            console.log e
+                        $('.vote').on 'click', (e) ->
+                            id = e.currentTarget.id
+                            $('#conversation').modal 'show'
+                            reset id, 'http://govwiki.us' + '/' + id, id
+                    error:(e) ->
+                        console.log e
 
 # Refresh Disqus thread
 reset = (newIdentifier, newUrl, newTitle) ->

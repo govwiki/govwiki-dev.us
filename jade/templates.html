@@ -134,22 +134,22 @@
 
     <div class="row" style="margin-top: 40px; margin-bottom: 40px;">
         <div class="col-md-10 col-md-push-1">
-            <h5>ANAHEIM ELEMENTARY SCHOOL DISTRICT</h5>
+            <h5>{{gov_name}}</h5>
             <h5>ELECTED OFFICIALS - PROFILE</h5>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-7 col-md-push-1" style="font-size:16px;">
+        <div class="col-xs-7 col-sm-7 col-md-7 col-md-push-1 col-lg-7 col-lg-push-1" style="font-size:16px;">
             <p>Title: {{title}}</p>
             <p>Name: {{full_name}}</p>
-            <p>Term expiries: {{term_expiries}}</p>
-            <p><a href="void(0)">Biographical Highlights</a></p>
+            <p>Term expiries: {{term_expires}}</p>
+            <p><a href="javascript:void(0)">Biographical Highlights</a></p>
             <p>Email: {{email_address}}</p>
         </div>
 
-        <div class="col-md-3">
-            <img src="{{photo_url}}"/>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <img src="{{photo_url}}" class="person-photo"/>
         </div>
     </div>
 
@@ -176,24 +176,27 @@
                             <th>How official Voted</th>
                             <th>Proposed?</th>
                             <th>Category</th>
+                            <th></th>
                         </tr>
                         <!-- TODO: WARNING!!! MUST BE REFACTOR !!! id must be UNIQUE -->
-                        <tr class="vote" id="{{elected_official_id}}_v1">
+                        <tr>
                             <td>08-10-2015</td>
                             <td>Title</td>
                             <td>Summary</td>
                             <td>How</td>
                             <td>Proposed</td>
                             <td>Category</td>
+                            <td><img src="/img/disqus_icon.png" class="vote" id="{{elected_official_id}}_v1"/></td>
                         </tr>
                         <!-- TODO: WARNING!!! MUST BE REFACTOR !!! id must be UNIQUE -->
-                        <tr class="vote" id="{{elected_official_id}}_v2">
+                        <tr>
                             <td>08-11-2015</td>
                             <td>Title</td>
                             <td>Summary</td>
                             <td>How</td>
                             <td>Proposed</td>
                             <td>Category</td>
+                            <td><img src="/img/disqus_icon.png" class="vote" id="{{elected_official_id}}_v2"/></td>
                         </tr>
                     </table>
                 </div>

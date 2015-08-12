@@ -485,3 +485,9 @@ span.rank {
     margin-bottom: 10px;
   }
 }
+.person-photo {
+  width: 170px;
+}
+.vote {
+  cursor: pointer;
+}
