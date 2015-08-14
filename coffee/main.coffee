@@ -346,8 +346,10 @@ router.get ':id/:user_id', (req, event) ->
             app_name:"govwiki"
         success: (data) ->
             gov_name = data.record[0].gov_name
-
-            do () =>
+            votes = null
+            contributions = null
+            endorsements = null
+            do (votes) =>
                 $.ajax
                     url: "http://46.101.3.79:80/rest/db/_proc/getVotes?app_name=govwiki"
                     data:
@@ -362,31 +364,74 @@ router.get ':id/:user_id', (req, event) ->
                     dataType: 'json'
                     success: (data) ->
                         votes = data
-                        do (gov_name, votes) =>
-                            $.ajax
-                                url:"http://46.101.3.79:80/rest/db/elected_officials"
-                                data:
-                                    filter: "elected_official_id=" + user_id
-                                    app_name:"govwiki"
-                                    limit: 25
-                                dataType: 'json'
-                                cache: true
-                                success: (data) ->
-                                    person = data.record[0]
-                                    person.gov_name = gov_name
-                                    person.votes = votes
-                                    console.log person
-                                    tpl = $('#person-info-template').html()
-                                    compiledTemplate = Handlebars.compile(tpl)
-                                    html = compiledTemplate(person)
-                                    $('#searchContainer').html html
+                        getContributions votes
 
-                                    $('.vote').on 'click', (e) ->
-                                        id = e.currentTarget.id
-                                        $('#conversation').modal 'show'
-                                        reset id, 'http://govwiki.us' + '/' + id, id
-                                error:(e) ->
-                                    console.log e
+
+
+            getContributions = (votes) ->
+                $.ajax
+                    url: "http://46.101.3.79:80/rest/db/_proc/getContributions?app_name=govwiki"
+                    data:
+                        app_name: "govwiki"
+                        params: [{
+                            "name": "id",
+                            "param_type": "INT",
+                            "value": user_id,
+                            "type": "json",
+                            "length": 0
+                        }]
+                    dataType: 'json'
+                    success: (data) ->
+                        contributions = data
+                        getEndorsements votes, contributions
+
+
+            getEndorsements = (votes, contributions) ->
+                $.ajax
+                    url: "http://46.101.3.79:80/rest/db/_proc/getEndorsements?app_name=govwiki"
+                    data:
+                        app_name: "govwiki"
+                        params: [{
+                            "name": "id",
+                            "param_type": "INT",
+                            "value": user_id,
+                            "type": "json",
+                            "length": 0
+                        }]
+                    dataType: 'json'
+                    success: (data) ->
+                        endorsements = data
+                        getElectedOffical votes, contributions, endorsements
+
+
+
+            getElectedOffical = (votes, contributions, endorsements) ->
+                $.ajax
+                    url:"http://46.101.3.79:80/rest/db/elected_officials"
+                    data:
+                        filter: "elected_official_id=" + user_id
+                        app_name:"govwiki"
+                        limit: 25
+                    dataType: 'json'
+                    cache: true
+                    success: (data) ->
+                        person = data.record[0]
+                        person.gov_name = gov_name
+                        person.votes = votes
+                        person.contributions = contributions
+                        person.endorsements = endorsements
+                        console.log person
+                        tpl = $('#person-info-template').html()
+                        compiledTemplate = Handlebars.compile(tpl)
+                        html = compiledTemplate(person)
+                        $('#searchContainer').html html
+
+                        $('.vote').on 'click', (e) ->
+                            id = e.currentTarget.id
+                            $('#conversation').modal 'show'
+                            reset id, 'http://govwiki.us' + '/' + id, id
+                    error:(e) ->
+                        console.log e
 
 # Refresh Disqus thread
 reset = (newIdentifier, newUrl, newTitle) ->

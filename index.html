@@ -300,7 +300,7 @@
                                 <td>{{name}}</td>
                                 <td>{{summary}}</td>
                                 <td>{{vote}}</td>
-                                <td>{{did_elected_official_propose_this}}</td>
+                                <td>{{#if did_elected_official_propose_this}} Yes {{else}} No {{/if}}</td>
                                 <td>{{issue_category_name}}</td>
                                 <td><img src="img/disqus_icon.png" class="vote" id="{{../../elected_official_id}}_v1"/></td>
                             {{/this}}
@@ -319,20 +319,19 @@
                             <th>Amount</th>
                             <th>Contributor Type</th>
                         </tr>
+
+                        {{#contributions}}
                         <tr>
-                            <td>08-10-2015</td>
-                            <td>contributor</td>
-                            <td>Desc</td>
-                            <td>Amount</td>
-                            <td>Contributor Type</td>
+                            {{#this}}
+                                <td>{{election_year}}</td>
+                                <td>{{contributor_name}}</td>
+                                <td>{{independent_expenditure_desc}}</td>
+                                <td>{{contribution_amount}}</td>
+                                <td>{{contributor_type}}</td>
+                            {{/this}}
                         </tr>
-                        <tr>
-                            <td>08-11-2015</td>
-                            <td>contributor</td>
-                            <td>Desc</td>
-                            <td>Amount</td>
-                            <td>Contributor Type</td>
-                        </tr>
+                        {{/contributions}}
+
                     </table>
                 </div>
 
@@ -343,16 +342,15 @@
                             <th>Name</th>
                             <th>Type</th>
                         </tr>
+                        {{#endorsements}}
                         <tr>
-                            <td>2015</td>
-                            <td>Contributor</td>
-                            <td>Type</td>
+                            {{#this}}
+                                <td>{{election_year}}</td>
+                                <td>{{name_of_endorser}}</td>
+                                <td>{{endorser_type}}</td>
+                            {{/this}}
                         </tr>
-                        <tr>
-                            <td>2015</td>
-                            <td>Contributor</td>
-                            <td>Type</td>
-                        </tr>
+                        {{/endorsements}}
                     </table>
                 </div>
 
