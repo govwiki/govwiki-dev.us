@@ -178,26 +178,21 @@
                             <th>Category</th>
                             <th></th>
                         </tr>
-                        <!-- TODO: WARNING!!! MUST BE REFACTOR !!! id must be UNIQUE -->
-                        <tr>
-                            <td>08-10-2015</td>
-                            <td>Title</td>
-                            <td>Summary</td>
-                            <td>How</td>
-                            <td>Proposed</td>
-                            <td>Category</td>
-                            <td><img src="img/disqus_icon.png" class="vote" id="{{elected_official_id}}_v1"/></td>
-                        </tr>
-                        <!-- TODO: WARNING!!! MUST BE REFACTOR !!! id must be UNIQUE -->
-                        <tr>
-                            <td>08-11-2015</td>
-                            <td>Title</td>
-                            <td>Summary</td>
-                            <td>How</td>
-                            <td>Proposed</td>
-                            <td>Category</td>
-                            <td><img src="img/disqus_icon.png" class="vote" id="{{elected_official_id}}_v2"/></td>
-                        </tr>
+
+                        {{#votes}}
+                            <tr>
+                            {{#this}}
+                                <td>{{date_considered}}</td>
+                                <td>{{name}}</td>
+                                <td>{{summary}}</td>
+                                <td>{{vote}}</td>
+                                <td>{{did_elected_official_propose_this}}</td>
+                                <td>{{issue_category_name}}</td>
+                                <td><img src="img/disqus_icon.png" class="vote" id="{{../../elected_official_id}}_v1"/></td>
+                            {{/this}}
+                            </tr>
+                        {{/votes}}
+
                     </table>
                 </div>
 
