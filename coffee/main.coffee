@@ -363,6 +363,8 @@ router.get ':id/:user_id', (req, event) ->
                         }]
                     dataType: 'json'
                     success: (data) ->
+                        for vote in data
+                          vote.date_considered = new Date(vote.date_considered).toLocaleDateString()
                         votes = data
                         getContributions votes
 
