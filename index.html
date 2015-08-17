@@ -258,7 +258,9 @@
             <p>Title: {{title}}</p>
             <p>Name: {{full_name}}</p>
             <p>Term expiries: {{term_expires}}</p>
-            <p><a href="javascript:void(0)">Biographical Highlights</a></p>
+            {{#if bio_url}}
+                <p><a href="{{bio_url}}">Biographical Highlights</a></p>
+            {{/if}}
             <p>Email: {{email_address}}</p>
         </div>
 

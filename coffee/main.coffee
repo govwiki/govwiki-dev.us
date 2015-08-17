@@ -420,12 +420,10 @@ router.get ':id/:user_id', (req, event) ->
                         person.votes = votes
                         person.contributions = contributions
                         person.endorsements = endorsements
-                        console.log person
                         tpl = $('#person-info-template').html()
                         compiledTemplate = Handlebars.compile(tpl)
                         html = compiledTemplate(person)
                         $('#searchContainer').html html
-
                         $('.vote').on 'click', (e) ->
                             id = e.currentTarget.id
                             $('#conversation').modal 'show'
