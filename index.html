@@ -322,6 +322,7 @@
                                 <th>Election Year</th>
                                 <th>Name of contributor</th>
                                 <th>Ind. Exp. Desc.</th>
+                                <th></th>
                                 <th>Amount</th>
                                 <th>Contributor Type</th>
                             </tr>
@@ -332,6 +333,7 @@
                                     <td>{{election_year}}</td>
                                     <td>{{contributor_name}}</td>
                                     <td>{{independent_expenditure_desc}}</td>
+                                    <td>{{#unless @index}}${{/unless}}</td>
                                     <td>{{contribution_amount}}</td>
                                     <td>{{contributor_type}}</td>
                                 {{/this}}
