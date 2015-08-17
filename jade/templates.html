@@ -170,96 +170,91 @@
             <div class="tab-content" style="margin-top: 40px; margin-bottom: 40px;">
 
                 <div role="tabpanel" class="tab-pane active" id="Votes">
-                    <table class="table table-hover">
-                        <tr>
-                            <th>Date</th>
-                            <th>Title of Measure</th>
-                            <th>Summary of Measure</th>
-                            <th>How official Voted</th>
-                            <th>Proposed?</th>
-                            <th>Category</th>
-                            <th></th>
-                        </tr>
-
-                        {{#votes}}
+                    {{#if votes}}
+                        <table class="table table-hover">
                             <tr>
-                            {{#this}}
-                                <td>{{date_considered}}</td>
-                                <td>{{name}}</td>
-                                <td>{{summary}}</td>
-                                <td>{{vote}}</td>
-                                <td>{{#if did_elected_official_propose_this}} Yes {{else}} No {{/if}}</td>
-                                <td>{{issue_category_name}}</td>
-                                <td><img src="img/disqus_icon.png" class="vote" id="{{../../elected_official_id}}_v1"/></td>
-                            {{/this}}
+                                <th>Date</th>
+                                <th>Title of Measure</th>
+                                <th>Summary of Measure</th>
+                                <th>How official Voted</th>
+                                <th>Proposed?</th>
+                                <th>Category</th>
+                                <th></th>
                             </tr>
-                        {{/votes}}
 
-                    </table>
+                            {{#votes}}
+                                <tr>
+                                {{#this}}
+                                    <td>{{date_considered}}</td>
+                                    <td>{{name}}</td>
+                                    <td>{{summary}}</td>
+                                    <td>{{vote}}</td>
+                                    <td>{{#if did_elected_official_propose_this}} Yes {{else}} No {{/if}}</td>
+                                    <td>{{issue_category_name}}</td>
+                                    <td><img src="img/disqus_icon.png" class="vote" id="{{../../elected_official_id}}_v1"/></td>
+                                {{/this}}
+                                </tr>
+                            {{/votes}}
+                        </table>
+                    {{else}}
+                        <h4>No information at this time. Please check back later.</h4>
+                    {{/if}}
                 </div>
 
                 <div role="tabpanel" class="tab-pane" id="Contributions">
-                    <table class="table table-hover">
-                        <tr>
-                            <th>Election Year</th>
-                            <th>Name of contributor</th>
-                            <th>Ind. Exp. Desc.</th>
-                            <th>Amount</th>
-                            <th>Contributor Type</th>
-                        </tr>
+                    {{#if contributions}}
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Election Year</th>
+                                <th>Name of contributor</th>
+                                <th>Ind. Exp. Desc.</th>
+                                <th>Amount</th>
+                                <th>Contributor Type</th>
+                            </tr>
 
-                        {{#contributions}}
-                        <tr>
-                            {{#this}}
-                                <td>{{election_year}}</td>
-                                <td>{{contributor_name}}</td>
-                                <td>{{independent_expenditure_desc}}</td>
-                                <td>{{contribution_amount}}</td>
-                                <td>{{contributor_type}}</td>
-                            {{/this}}
-                        </tr>
-                        {{/contributions}}
+                            {{#contributions}}
+                            <tr>
+                                {{#this}}
+                                    <td>{{election_year}}</td>
+                                    <td>{{contributor_name}}</td>
+                                    <td>{{independent_expenditure_desc}}</td>
+                                    <td>{{contribution_amount}}</td>
+                                    <td>{{contributor_type}}</td>
+                                {{/this}}
+                            </tr>
+                            {{/contributions}}
 
-                    </table>
+                        </table>
+                    {{else}}
+                        <h4>No information at this time. Please check back later.</h4>
+                    {{/if}}
                 </div>
 
                 <div role="tabpanel" class="tab-pane" id="Endorsements">
-                    <table class="table table-hover">
-                        <tr>
-                            <th>Election Year</th>
-                            <th>Name</th>
-                            <th>Type</th>
-                        </tr>
-                        {{#endorsements}}
-                        <tr>
-                            {{#this}}
-                                <td>{{election_year}}</td>
-                                <td>{{name_of_endorser}}</td>
-                                <td>{{endorser_type}}</td>
-                            {{/this}}
-                        </tr>
-                        {{/endorsements}}
-                    </table>
+                    {{#if endorsements}}
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Election Year</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                            </tr>
+                            {{#endorsements}}
+                            <tr>
+                                {{#this}}
+                                    <td>{{election_year}}</td>
+                                    <td>{{name_of_endorser}}</td>
+                                    <td>{{endorser_type}}</td>
+                                {{/this}}
+                            </tr>
+                            {{/endorsements}}
+                        </table>
+                    {{else}}
+                        <h4>No information at this time. Please check back later.</h4>
+                    {{/if}}
                 </div>
 
                 <div role="tabpanel" class="tab-pane" id="Statements">
-                    <table class="table table-hover">
-                        <tr>
-                            <th>Date</th>
-                            <th>Text/Video of Statement</th>
-                            <th>Category</th>
-                        </tr>
-                        <tr>
-                            <td>08-10-2015</td>
-                            <td>Video</td>
-                            <td>Category</td>
-                        </tr>
-                        <tr>
-                            <td>08-10-2015</td>
-                            <td>Video</td>
-                            <td>Category</td>
-                        </tr>
-                    </table>
+                    <h4>No information at this time. Please check back later.</h4>
                 </div>
             </div>
 
