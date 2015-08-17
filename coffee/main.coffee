@@ -384,6 +384,10 @@ router.get ':id/:user_id', (req, event) ->
                         }]
                     dataType: 'json'
                     success: (data) ->
+                        for contribution in data
+                          amount = numeral contribution.contribution_amount
+                          formatted_amount = amount.format('0,000.00')
+                          contribution.contribution_amount = formatted_amount
                         contributions = data
                         getEndorsements votes, contributions
 
