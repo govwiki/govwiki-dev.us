@@ -336,6 +336,7 @@ window.onhashchange = (e) ->
 router = new Grapnel
 
 router.get ':id/:user_id', (req, event) ->
+    $('#searchContainer').empty()
     gov_id = req.params.id.substr(0)
     user_id = req.params.user_id
     templates.load_fusion_template "tabs", "https://www.googleapis.com/fusiontables/v2/query?sql=SELECT%20*%20FROM%201z2oXQEYQ3p2OoMI8V5gKgHWB5Tz990BrQ1xc1tVo&key=AIzaSyCXDQyMDpGA2g3Qjuv4CDv7zRj-ix4IQJA"
