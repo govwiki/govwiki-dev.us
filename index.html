@@ -306,7 +306,7 @@
         <div class="col-md-10 col-md-push-1">
 
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
+            <ul class="nav nav-pills" role="tablist">
                 <li role="presentation" class="active"><a href="#Votes" aria-controls="Votes" role="tab" data-toggle="tab">Votes</a></li>
                 <li role="presentation"><a href="#Contributions" aria-controls="Contributions" role="tab" data-toggle="tab">Contributions</a></li>
                 <li role="presentation"><a href="#Endorsements" aria-controls="Endorsements" role="tab" data-toggle="tab">Endorsements</a></li>
@@ -323,8 +323,8 @@
                                 <th>Date</th>
                                 <th>Title of Measure</th>
                                 <th>Summary of Measure</th>
-                                <th>How official Voted</th>
-                                <th>Proposed?</th>
+                                <th style="text-align:center;">How official Voted</th>
+                                <th style="text-align:center;">Sponsored by this official?</th>
                                 <th>Category</th>
                                 <th></th>
                             </tr>
@@ -335,8 +335,8 @@
                                     <td>{{date_considered}}</td>
                                     <td>{{name}}</td>
                                     <td>{{summary}}</td>
-                                    <td>{{vote}}</td>
-                                    <td>{{#if did_elected_official_propose_this}} Yes {{else}} No {{/if}}</td>
+                                    <td align="center">{{vote}}</td>
+                                    <td align="center">{{#if did_elected_official_propose_this}} Yes {{else}} No {{/if}}</td>
                                     <td>{{issue_category_name}}</td>
                                     <td><img src="img/disqus_icon.png" class="vote" id="{{../../elected_official_id}}_v1"/></td>
                                 {{/this}}
