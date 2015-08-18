@@ -6,7 +6,7 @@
 </script>
 
 <script id="tabpanel-template" type="text/x-handlebars-template">
-	<div id="details">
+	<div id="details-inner">
     <div style="min-height:60px;">
       <div style="text-align:right; min-height:48px;" class="pull-right top-links-wrapper">
         {{#if wikipedia_page_name}}
@@ -40,6 +40,32 @@
 				{{{tabcontent}}}
 			</div>
 		</div>
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="wiki" style="display:none0">
+        {{#if wikipedia_page_name}}
+            <a  href="javascript:get_wikipedia_article('{{wikipedia_page_name}}')">
+              Show Wikipedia article
+            </a>
+            <h3 id="wikipediaTitle"></h3>
+            <div id="wikipediaArticle"></div>
+            {{else}}
+            There is no corresponding article at Wikipedia site. You can create a new one.<br>
+            Title:<br>
+            <input id="newWikipediaTitle" type="text" value="{{gov_name}}" style="width:100%">
+            <br>
+            Text:<br>
+            <textarea id="newWikipediaArticle" style="width:100%; height:200px;border:1px solid #DDD">
+            {{gov_name}}
+            </textarea>
+            <button class="btn btn-primary pull-right" type="button" onclick="create_wikipedia_article()">
+                Create Wikipedia article
+            </button>
+        {{/if}}
+    </div>        
 	</div>
 </script>
 

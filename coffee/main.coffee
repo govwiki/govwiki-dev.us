@@ -11,6 +11,7 @@ GovSelector = require './govselector.coffee'
 #_jqgs       = require './jquery.govselector.coffee'
 Templates2      = require './templates2.coffee'
 govmap      = require './govmap.coffee'
+wikipedia   = require './wikipedia.coffee'
 #scrollto = require '../bower_components/jquery.scrollTo/jquery.scrollTo.js'
 
 window.GOVWIKI =
