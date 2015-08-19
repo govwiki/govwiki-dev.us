@@ -163,6 +163,8 @@ get_record = (query) ->
 
 
 get_record2 = (recid) ->
+  # clear wikipedia place
+  $("#wikipediaContainer").html("")
   $.ajax
     #url: "https://dsp-govwiki.cloud.dreamfactory.com:443/rest/govwiki_api/govs/#{recid}"
     url: "http://46.101.3.79:80/rest/db/govs/#{recid}"
@@ -179,7 +181,11 @@ get_record2 = (recid) ->
               data.max_ranks = max_ranks_response.record[0]
               $('#details').html templates.get_html(0, data)
               activate_tab()
-            #govmap.geocode data[0]
+            
+        # fill wikipedia place  
+        #wpn = data.wikipedia_page_name
+        #$("#wikipediaContainer").html(if wpn then wpn else "No Wikipedia article")
+
       return
     error:(e) ->
       console.log e
