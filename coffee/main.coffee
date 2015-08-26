@@ -181,8 +181,8 @@ get_record2 = (recid) ->
               data.max_ranks = max_ranks_response.record[0]
               $('#details').html templates.get_html(0, data)
               activate_tab()
-            
-        # fill wikipedia place  
+
+        # fill wikipedia place
         #wpn = data.wikipedia_page_name
         #$("#wikipediaContainer").html(if wpn then wpn else "No Wikipedia article")
 
@@ -345,7 +345,6 @@ router.get ':id/:user_id', (req, event) ->
     $('#searchContainer').empty()
     gov_id = req.params.id.substr(0)
     user_id = req.params.user_id
-    templates.load_fusion_template "tabs", "https://www.googleapis.com/fusiontables/v2/query?sql=SELECT%20*%20FROM%201z2oXQEYQ3p2OoMI8V5gKgHWB5Tz990BrQ1xc1tVo&key=AIzaSyCXDQyMDpGA2g3Qjuv4CDv7zRj-ix4IQJA"
     $.ajax
         url:"http://46.101.3.79:80/rest/db/govs"
         data:
