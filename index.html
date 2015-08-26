@@ -37,59 +37,7 @@
       </div>
     </div>
     <!-- Search & Filters-->
-    <div id="searchContainer" style="width0:100%" class="container container-fluid">
-      <div style="padding-top:40px;margin-bottom:10px;" class="row search-form">
-        <div id="typeahed-container" style="border:0px solid red" class="col-sm-5">
-          <input id="myinput" type="text" placeholder="Loading the list of 91,000 US governments..." style="width:412px" class="text-uppercase typeahead form-control0">
-          <p class="text-center text-nowrap hidden-xs hidden-sm">Type part of the agency's name  &nbsp;&nbsp;<img src="img/FullSizeRender.gif" style="width:40px">
-            <!--span(style="font-size:150%; position:relative; top:-6px;")⤴-->&nbsp; or click it on the map &nbsp;&nbsp;<img src="img/FullSizeRender1.gif" style="width:40px">
-            <!--span(style="font-size:150%;position: relative; top:12px;")⤵-->
-          </p>
-        </div>
-        <div style="border:0px solid red; opacity:0.5;padding:0;margin:0; line-height:1" class="col-sm-2 text-center hidden-xs">
-          <div style="margin-top:8px; font-size:150%;font-weight:bold;" class="gov-counter"></div>
-        </div>
-      </div>
-      <!-- MAP-->
-      <div style="margin-bottom:100px;" class="row">
-        <div style="padding:0;" class="col-sm-12 col-lg-5 col-md-6">
-          <div id="maparea" style="border:1px solid #e1e1e1;margin-left:10px;">
-            <div id="govmap"></div>
-            <!-- Controls to show results of geocoding-->
-            <!--div
-            .input-group
-              span.input-group-addon
-                strong FIND:
-              input#govaddress.form-control.input-sm ss
-              .input-group-btn
-                button.glyphicon.glyphicon-search.btn.btn-default.input-sm(onclick="geocode_addr('#govaddress')")
-            .govmap-found
-            -->
-          </div>
-        </div>
-        <div class="col-lg-7 col-md-6 col-sm-12">
-          <div id="intro-text"></div>
-          <!--include right_panel.html-->
-        </div>
-      </div>
-      <div style="display:none;">
-        <div id="legend" class="panel panel-default">
-          <div class="panel-heading">Select type(s):</div>
-          <ul class="list-group">
-            <li class="list-group-item active"><span class="glyphicon glyphicon-ok"></span><i class="red-circle marker-circle"></i>Cities
-              <input type="hidden" name="City" value="1" class="type_filter">
-            </li>
-            <li class="list-group-item active counties-trigger"><span class="glyphicon glyphicon-ok"></span><i class="grey-line"></i><!--<span class="counties-title">-->Counties<!--</span>--></li>
-            <li class="list-group-item active"><span class="glyphicon glyphicon-ok"></span><i class="blue-circle marker-circle"></i>School Districts
-              <input type="hidden" name="School District" value="1" class="type_filter">
-            </li>
-            <li class="list-group-item active"><span class="glyphicon glyphicon-ok"></span><i class="purple-circle marker-circle"></i>Special Districts
-              <input type="hidden" name="Special District" value="1" class="type_filter">
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <div id="searchContainer" style="width0:100%" class="container container-fluid"></div>
     <!-- DATA-->
     <div id="dataContainer" class="container">
       <!--p#pBackToSearch.text-center
@@ -154,7 +102,7 @@
 				{{{tabcontent}}}
 			</div>
 		</div>
-    
+
     <br>
     <br>
     <br>
@@ -179,7 +127,7 @@
                 Create Wikipedia article
             </button>
         {{/if}}
-    </div>        
+    </div>
 	</div>
 </script>
 
@@ -403,9 +351,70 @@
         </div>
     </div>
 
-
-
 </script>
+
+<script id="search-container-template" type="text/x-handlebars-template">
+    <div style="padding-top:40px;margin-bottom:10px;" class="row search-form">
+        <div id="typeahed-container" style="border:0px solid red" class="col-sm-5">
+            <input id="myinput" type="text" placeholder="Loading the list of 91,000 US governments..."
+                   style="width:412px" class="text-uppercase typeahead form-control0">
+
+            <p class="text-center text-nowrap hidden-xs hidden-sm">Type part of the agency's name &nbsp;&nbsp;<img
+                src="img/FullSizeRender.gif" style="width:40px">
+                <!--span(style="font-size:150%; position:relative; top:-6px;")⤴-->&nbsp; or click it on the map &nbsp;&nbsp;<img
+                    src="img/FullSizeRender1.gif" style="width:40px">
+                <!--span(style="font-size:150%;position: relative; top:12px;")⤵-->
+            </p>
+        </div>
+        <div style="border:0px solid red; opacity:0.5;padding:0;margin:0; line-height:1"
+             class="col-sm-2 text-center hidden-xs">
+            <div style="margin-top:8px; font-size:150%;font-weight:bold;" class="gov-counter"></div>
+        </div>
+    </div>
+    <div style="margin-bottom:100px;" class="row">
+        <div style="padding:0;" class="col-sm-12 col-lg-5 col-md-6">
+            <div id="maparea" style="border:1px solid #e1e1e1;margin-left:10px;">
+                <div id="govmap"></div>
+                <!-- Controls to show results of geocoding-->
+                <!--div
+                .input-group
+                  span.input-group-addon
+                    strong FIND:
+                  input#govaddress.form-control.input-sm ss
+                  .input-group-btn
+                    button.glyphicon.glyphicon-search.btn.btn-default.input-sm(onclick="geocode_addr('#govaddress')")
+                .govmap-found
+                -->
+            </div>
+        </div>
+        <div class="col-lg-7 col-md-6 col-sm-12">
+            <div id="intro-text"></div>
+            <!--include right_panel.html-->
+        </div>
+    </div>
+    <div style="display:none;">
+        <div id="legend" class="panel panel-default">
+            <div class="panel-heading">Select type(s):</div>
+            <ul class="list-group">
+                <li class="list-group-item active"><span class="glyphicon glyphicon-ok"></span><i
+                    class="red-circle marker-circle"></i>Cities
+                    <input type="hidden" name="City" value="1" class="type_filter">
+                </li>
+                <li class="list-group-item active counties-trigger"><span class="glyphicon glyphicon-ok"></span><i
+                    class="grey-line"></i><!--<span class="counties-title">-->Counties<!--</span>--></li>
+                <li class="list-group-item active"><span class="glyphicon glyphicon-ok"></span><i
+                    class="blue-circle marker-circle"></i>School Districts
+                    <input type="hidden" name="School District" value="1" class="type_filter">
+                </li>
+                <li class="list-group-item active"><span class="glyphicon glyphicon-ok"></span><i
+                    class="purple-circle marker-circle"></i>Special Districts
+                    <input type="hidden" name="Special District" value="1" class="type_filter">
+                </li>
+            </ul>
+        </div>
+    </div>
+</script>
+
 
 <!-- Modal -->
 <div class="modal fade" id="conversation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

@@ -10,7 +10,7 @@ gov_finder.on_select = gov_details.show
 GovSelector = require './govselector.coffee'
 #_jqgs       = require './jquery.govselector.coffee'
 Templates2      = require './templates2.coffee'
-govmap      = require './govmap.coffee'
+govmap = null
 wikipedia   = require './wikipedia.coffee'
 #scrollto = require '../bower_components/jquery.scrollTo/jquery.scrollTo.js'
 
@@ -87,8 +87,6 @@ GOVWIKI.draw_polygons = draw_polygons = (countiesJSON) ->
       click: ->
         router.navigate "#{this.countyId}"
     })
-
-get_counties draw_polygons
 
 window.remember_tab =(name)-> active_tab = name
 
@@ -342,7 +340,6 @@ window.onhashchange = (e) ->
 router = new Grapnel
 
 router.get ':id/:user_id', (req, event) ->
-    $('#searchContainer').empty()
     gov_id = req.params.id.substr(0)
     user_id = req.params.user_id
     $.ajax
@@ -513,10 +510,11 @@ router.get ':id', (req, event) ->
             return
 
 router.get '', (req, event) ->
-    templates.load_fusion_template "tabs", "https://www.googleapis.com/fusiontables/v2/query?sql=SELECT%20*%20FROM%201z2oXQEYQ3p2OoMI8V5gKgHWB5Tz990BrQ1xc1tVo&key=AIzaSyCXDQyMDpGA2g3Qjuv4CDv7zRj-ix4IQJA"
-
-build_selector('.state-container' , 'State..' , '{"distinct": "govs","key":"state"}' , 'state_filter')
-build_selector('.gov-type-container' , 'type of government..' , '{"distinct": "govs","key":"gov_type"}' , 'gov_type_filter')
+    $('#searchContainer').html $('#search-container-template').html()
+    govmap = require './govmap.coffee'
+    get_counties draw_polygons
+    build_selector('.state-container' , 'State..' , '{"distinct": "govs","key":"state"}' , 'state_filter')
+    build_selector('.gov-type-container' , 'type of government..' , '{"distinct": "govs","key":"gov_type"}' , 'gov_type_filter')
 
 adjust_typeahead_width()
 start_adjusting_typeahead_width()

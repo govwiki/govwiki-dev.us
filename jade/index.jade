@@ -31,50 +31,8 @@ html(lang='en')
 
     // Search & Filters
     #searchContainer.container.container-fluid(style="width0:100%")
-      .row.search-form(style="padding-top:40px;margin-bottom:10px;")
-        #typeahed-container.col-sm-5(style='border:0px solid red')
-          input#myinput.text-uppercase.typeahead.form-control0(type='text', placeholder='Loading the list of 91,000 US governments...' style="width:412px")
-          p.text-center.text-nowrap.hidden-xs.hidden-sm
-            |Type part of the agency's name  &nbsp;&nbsp;
-            img(src='img/FullSizeRender.gif', style='width:40px')
-            //span(style="font-size:150%; position:relative; top:-6px;")⤴
-            |&nbsp; or click it on the map &nbsp;&nbsp;
-            img(src='img/FullSizeRender1.gif', style='width:40px')
-            //span(style="font-size:150%;position: relative; top:12px;")⤵
 
-        .col-sm-2.text-center.hidden-xs(style='border:0px solid red; opacity:0.5;padding:0;margin:0; line-height:1')
-          .gov-counter(style="margin-top:8px; font-size:150%;font-weight:bold;")
 
-        //- .col-sm-5.text-right(style='border:0px solid red;')
-        //-   form.form-inline
-        //-     span.state-container(style="margin-right:20px;display:none;")
-        //-     span.gov-type-container
-        //-   p.text-center.text-nowrap.hidden-xs.hidden-sm
-        //-     //img(src='img/FullSizeRender2.gif', style='width:40px')
-        //-     //|flter by state, &nbsp;&nbsp;
-        //-     |filter by&nbsp;&nbsp;
-        //-     img(src='img/FullSizeRender.gif', style='width:40px')
-        //-     //span(style="font-size:150%; position:relative; top:-6px;")⤴
-      // MAP
-      .row(style="margin-bottom:100px;")
-          .col-sm-12.col-lg-5.col-md-6(style="padding:0;")
-            #maparea(style="border:1px solid #e1e1e1;margin-left:10px;")
-              #govmap
-              // Controls to show results of geocoding
-              //div
-                .input-group
-                  span.input-group-addon
-                    strong FIND:
-                  input#govaddress.form-control.input-sm ss
-                  .input-group-btn
-                    button.glyphicon.glyphicon-search.btn.btn-default.input-sm(onclick="geocode_addr('#govaddress')")
-                .govmap-found
-          .col-lg-7.col-md-6.col-sm-12
-            #intro-text
-            //include right_panel.html
-
-      div(style="display:none;")
-        include legend.jade
     // DATA
     #dataContainer.container
       //p#pBackToSearch.text-center
