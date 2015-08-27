@@ -339,7 +339,14 @@ window.onhashchange = (e) ->
 
 router = new Grapnel
 
+GOVWIKI.history = (index) ->
+    index = parseInt index
+    href = window.location.href.split '/'
+    router.navigate href[href.length-index]
+
 router.get ':id/:user_id', (req, event) ->
+    document.title = 'CPC Politician Profiles'
+    $('#stantonIcon').show()
     gov_id = req.params.id.substr(0)
     user_id = req.params.user_id
     $.ajax
@@ -433,7 +440,7 @@ router.get ':id/:user_id', (req, event) ->
                         tpl = $('#person-info-template').html()
                         compiledTemplate = Handlebars.compile(tpl)
                         html = compiledTemplate(person)
-                        $('#searchContainer').html html
+                        $('#details').html html
                         $('.vote').on 'click', (e) ->
                             id = e.currentTarget.id
                             $('#conversation').modal 'show'
@@ -450,8 +457,15 @@ reset = (newIdentifier, newUrl, newTitle) ->
             this.page.url = newUrl
             this.page.title = newTitle
 
+
+
+$('#dataContainer').on 'click', '.elected_link', (e) ->
+    router.navigate e.target.hash
+
 router.get ':id', (req, event) ->
+    document.title = 'CPC Civic Profiles'
     id = req.params.id
+    $('#stantonIcon').hide()
     templates.load_fusion_template "tabs", "https://www.googleapis.com/fusiontables/v2/query?sql=SELECT%20*%20FROM%201z2oXQEYQ3p2OoMI8V5gKgHWB5Tz990BrQ1xc1tVo&key=AIzaSyCXDQyMDpGA2g3Qjuv4CDv7zRj-ix4IQJA"
     console.log "ROUTER ID=#{id}"
     get_elected_officials = (gov_id, limit, onsuccess) ->

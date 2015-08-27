@@ -98,10 +98,10 @@
 </script>
 
 <script id="tabdetail-official-template" type="text/x-handlebars-template">
-	<div style="margin-top:20px;">
-    <span class="f-nam f-nam-margin">
+	<div style="margin-top:20px;" class="f-names">
+        <span class="f-nam f-nam-margin">
 			{{title}}<br>
-			<a href="#{{govs_id}}/{{elected_official_id}}" target="_blank">{{name}}</a><br>
+			<a href="#{{govs_id}}/{{elected_official_id}}" class="elected_link">{{name}}</a><br>
 			{{#if email}}
 			<a href="mailto:{{email}}">{{email}}</a><br />
 			{{/if}}
@@ -111,7 +111,7 @@
 			{{termexpires}}
 		</span>
 		{{#if image}}
-        <a href="#{{govs_id}}/{{elected_official_id}}" target="_blank"><span class="f-val">{{{image}}}</span></a>
+        <a href="#{{govs_id}}/{{elected_official_id}}" class="elected_link"><span class="f-val">{{{image}}}</span></a>
 		{{/if}}
 	</div>
 </script>

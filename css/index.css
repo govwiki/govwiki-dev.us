@@ -173,6 +173,9 @@
 #searchIcon {
   display: none;
 }
+#stantonIcon {
+  display: none;
+}
 #dataContainer {
   background-color: #fff;
   display: none;
