@@ -10,8 +10,14 @@ gov_finder.on_select = gov_details.show
 GovSelector = require './govselector.coffee'
 #_jqgs       = require './jquery.govselector.coffee'
 Templates2      = require './templates2.coffee'
-govmap = null
 wikipedia   = require './wikipedia.coffee'
+
+govmap = null
+gov_selector = null
+templates = new Templates2
+active_tab=""
+undef = null
+
 #scrollto = require '../bower_components/jquery.scrollTo/jquery.scrollTo.js'
 
 window.GOVWIKI =
@@ -34,14 +40,7 @@ window.GOVWIKI =
     #$(window).scrollTo('#pBackToSearch',600)
 
 #gov_selector = new GovSelector '.typeahead', 'data/h_types.json', 7
-gov_selector = new GovSelector '.typeahead', 'data/h_types_ca.json', 7
 #gov_selector = new GovSelector '.typeahead', 'http://46.101.3.79/rest/db/govs?filter=state=%22CA%22&app_name=govwiki&fields=_id,gov_name,gov_type,state&limit=5000', 7
-templates = new Templates2
-active_tab=""
-
-# Load introductory text from texts/intro-text.html to #intro-text container.
-$.get "texts/intro-text.html", (data) ->
-  $("#intro-text").html data
 
 
 GOVWIKI.get_counties = get_counties = (callback) ->
@@ -131,19 +130,6 @@ $(document).tooltip({selector: "[class='media-tooltip']",trigger:'click'})
 
 activate_tab =() ->
   $("#fieldTabs a[href='#tab#{active_tab}']").tab('show')
-
-gov_selector.on_selected = (evt, data, name) ->
-  #renderData '#details', data
-  get_elected_officials data._id, 25, (data2, textStatus, jqXHR) ->
-    data.elected_officials = data2
-    $('#details').html templates.get_html(0, data)
-    #get_record "inc_id:#{data["inc_id"]}"
-    get_record2 data["_id"]
-    activate_tab()
-    GOVWIKI.show_data_page()
-    router.navigate "#{data._id}"
-    return
-
 
 get_record = (query) ->
   $.ajax
@@ -300,8 +286,6 @@ adjust_typeahead_width =() ->
   inp.width par.width()
 
 
-
-
 start_adjusting_typeahead_width =() ->
   $(window).resize ->
     adjust_typeahead_width()
@@ -340,13 +324,16 @@ window.onhashchange = (e) ->
 router = new Grapnel
 
 GOVWIKI.history = (index) ->
+    if index == 0 then router.navigate ''; return false
     index = parseInt index
     href = window.location.href.split '/'
+    console.log href
     router.navigate href[href.length-index]
 
 router.get ':id/:user_id', (req, event) ->
     document.title = 'CPC Politician Profiles'
     $('#stantonIcon').show()
+    $('#searchIcon').show()
     gov_id = req.params.id.substr(0)
     user_id = req.params.user_id
     $.ajax
@@ -441,6 +428,7 @@ router.get ':id/:user_id', (req, event) ->
                         compiledTemplate = Handlebars.compile(tpl)
                         html = compiledTemplate(person)
                         $('#details').html html
+                        $('#dataContainer').css('display':'block');
                         $('.vote').on 'click', (e) ->
                             id = e.currentTarget.id
                             $('#conversation').modal 'show'
@@ -524,9 +512,26 @@ router.get ':id', (req, event) ->
             return
 
 router.get '', (req, event) ->
-    $('#searchContainer').html $('#search-container-template').html()
-    govmap = require './govmap.coffee'
-    get_counties draw_polygons
+    gov_selector = new GovSelector '.typeahead', 'data/h_types_ca.json', 7
+    gov_selector.on_selected = (evt, data, name) ->
+        get_elected_officials data._id, 25, (data2, textStatus, jqXHR) ->
+            data.elected_officials = data2
+            $('#details').html templates.get_html(0, data)
+            #get_record "inc_id:#{data["inc_id"]}"
+            get_record2 data["_id"]
+            activate_tab()
+            GOVWIKI.show_data_page()
+            router.navigate "#{data._id}"
+            return
+
+    if !undef
+        $('#searchContainer').html $('#search-container-template').html()
+        # Load introductory text from texts/intro-text.html to #intro-text container.
+        $.get "texts/intro-text.html", (data) ->
+            $("#intro-text").html data
+        govmap = require './govmap.coffee'
+        get_counties GOVWIKI.draw_polygons
+        undef = true
     build_selector('.state-container' , 'State..' , '{"distinct": "govs","key":"state"}' , 'state_filter')
     build_selector('.gov-type-container' , 'type of government..' , '{"distinct": "govs","key":"gov_type"}' , 'gov_type_filter')
 
