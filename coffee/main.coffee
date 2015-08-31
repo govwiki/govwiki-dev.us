@@ -532,11 +532,12 @@ router.get '', (req, event) ->
         govmap = require './govmap.coffee'
         get_counties GOVWIKI.draw_polygons
         undef = true
+    adjust_typeahead_width()
+    start_adjusting_typeahead_width()
     build_selector('.state-container' , 'State..' , '{"distinct": "govs","key":"state"}' , 'state_filter')
     build_selector('.gov-type-container' , 'type of government..' , '{"distinct": "govs","key":"gov_type"}' , 'gov_type_filter')
 
-adjust_typeahead_width()
-start_adjusting_typeahead_width()
+
 
 $('#btnBackToSearch').click (e)->
   e.preventDefault()
