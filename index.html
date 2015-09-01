@@ -278,7 +278,7 @@
                                     <td>{{name}}</td>
                                     <td>{{summary}}</td>
                                     <td align="center">{{vote}}</td>
-                                    <td align="center">{{#if did_elected_official_propose_this}} Yes {{else}} No {{/if}}</td>
+                                    <td align="center">{{#if_eq did_elected_official_propose_this true}} Yes {{else}} No {{/if_eq}}</td>
                                     <td>{{issue_category_name}}</td>
                                     <td><img src="img/disqus_icon.png" class="vote" id="{{../../elected_official_id}}_v1"/></td>
                                 {{/this}}

@@ -18,6 +18,12 @@ templates = new Templates2
 active_tab=""
 undef = null
 
+Handlebars.registerHelper 'if_eq', (a, b, opts) ->
+    if `a == b`
+        return opts.fn this
+    else
+        return opts.inverse this
+
 #scrollto = require '../bower_components/jquery.scrollTo/jquery.scrollTo.js'
 
 window.GOVWIKI =
