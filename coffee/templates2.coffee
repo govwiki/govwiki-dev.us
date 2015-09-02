@@ -443,7 +443,6 @@ render_tabs = (initial_layout, data, tabset, parent) ->
 
               rows = []
               for item in data.financial_statements
-                console.log '@@@@'+JSON.stringify item
                 if (item.category_name is "Revenues") and (item.caption isnt "Total Revenues")
 
                   r = [

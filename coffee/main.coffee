@@ -346,10 +346,11 @@ router.get ':id/:user_id', (req, event) ->
         url:"http://46.101.3.79:80/rest/db/govs"
         data:
             filter: "_id=" + gov_id
-            fields: "gov_name"
+            fields: "gov_name, alt_name"
             app_name:"govwiki"
         success: (data) ->
             gov_name = data.record[0].gov_name
+            alt_name = data.record[0].alt_name
             votes = null
             contributions = null
             endorsements = null
@@ -427,6 +428,7 @@ router.get ':id/:user_id', (req, event) ->
                     success: (data) ->
                         person = data.record[0]
                         person.gov_name = gov_name
+                        person.alt_name = alt_name
                         person.votes = votes
                         person.contributions = contributions
                         person.endorsements = endorsements
@@ -437,6 +439,7 @@ router.get ':id/:user_id', (req, event) ->
                         $('#dataContainer').css('display':'block');
                         $('.vote').on 'click', (e) ->
                             id = e.currentTarget.id
+                            $('#myModalLabel').text(person.full_name + ' (' + alt_name + ')');
                             $('#conversation').modal 'show'
                             reset id, 'http://govwiki.us' + '/' + id, id
                     error:(e) ->

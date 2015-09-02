@@ -217,7 +217,7 @@
                                     <td align="center">{{vote}}</td>
                                     <td align="center">{{#if_eq did_elected_official_propose_this true}} Yes {{else}} No {{/if_eq}}</td>
                                     <td>{{issue_category_name}}</td>
-                                    <td><img src="img/disqus_icon.png" class="vote" id="{{../../elected_official_id}}_v1"/></td>
+                                    <td><img src="img/disqus_icon.png" class="vote" id="{{../../elected_official_id}}_v{{eov_id}}"/></td>
                                 {{/this}}
                                 </tr>
                             {{/votes}}
@@ -360,7 +360,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Title (must be replace to actual title)</h4>
+                <h4 class="modal-title" id="myModalLabel"></h4>
             </div>
             <div class="modal-body">
                 <div id="disqus_thread"></div>
