@@ -437,6 +437,7 @@ router.get ':id/:user_id', (req, event) ->
                         html = compiledTemplate(person)
                         $('#details').html html
                         $('#dataContainer').css('display':'block');
+                        window.DISQUSWIDGETS.getCount()
                         $('.vote').on 'click', (e) ->
                             id = e.currentTarget.id
                             # If legislationName is undefined use person name
@@ -444,7 +445,7 @@ router.get ':id/:user_id', (req, event) ->
                             if name is undefined then name = person.full_name
                             $('#myModalLabel').text(name + ' (' + alt_name + ')');
                             $('#conversation').modal 'show'
-                            reset id, 'http://govwiki.us' + '/' + id, id
+                            reset id, 'http://govwiki.us' + '/' + id, name
                     error:(e) ->
                         console.log e
 

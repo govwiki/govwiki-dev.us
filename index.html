@@ -281,6 +281,7 @@
                                     <td align="center">{{#if_eq did_elected_official_propose_this true}} Yes {{else}} No {{/if_eq}}</td>
                                     <td>{{issue_category_name}}</td>
                                     <td><img src="img/comment.svg" class="vote" id="{{../../elected_official_id}}_v{{eov_id}}" data-legislation-name="{{name}}"/></td>
+                                    <td><span class="disqus-comment-count" data-disqus-identifier="{{../../elected_official_id}}_v{{eov_id}}"></span></td>
                                 {{/this}}
                                 </tr>
                             {{/votes}}
