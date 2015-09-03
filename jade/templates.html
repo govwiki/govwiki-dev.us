@@ -168,7 +168,8 @@
     <div class="row person-info-content">
         <div class="col-xs-7 col-sm-7 col-md-7 col-md-push-1 col-lg-7 col-lg-push-1" style="font-size:16px;">
             <p>Title: {{title}}</p>
-            <p>Name: {{full_name}} &nbsp;&nbsp;<img src="img/comment.svg" class="vote" id="{{elected_official_id}}"/></p>
+            <p>Name: {{full_name}} &nbsp;&nbsp;
+                <span class="disqus-comment-count vote" id="{{elected_official_id}}" data-disqus-identifier="{{elected_official_id}}"></span>
             <p>Term expiries: {{term_expires}}</p>
             {{#if bio_url}}
                 <p><a target="_blank" href="{{bio_url}}">Biographical Highlights</a></p>
