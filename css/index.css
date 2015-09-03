@@ -507,7 +507,7 @@ span.rank {
   text-align: center;
   width: 30px;
   height: 30px;
-  background-image: url("/img/comment.svg");
+  background-image: url("img/comment.svg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 2px;
