@@ -221,17 +221,17 @@
 
 <script id="person-info-template" type="text/x-handlebars-template">
 
-    <div class="row" style="margin-top: 40px; margin-bottom: 40px;">
+    <div class="row person-info-header">
         <div class="col-md-10 col-md-push-1">
             <h5>{{gov_name}}</h5>
             <h5>ELECTED OFFICIALS - PROFILE</h5>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row person-info-content">
         <div class="col-xs-7 col-sm-7 col-md-7 col-md-push-1 col-lg-7 col-lg-push-1" style="font-size:16px;">
             <p>Title: {{title}}</p>
-            <p>Name: {{full_name}}</p>
+            <p>Name: {{full_name}} &nbsp;&nbsp;<img src="img/comment.svg" class="vote" id="{{elected_official_id}}"/></p>
             <p>Term expiries: {{term_expires}}</p>
             {{#if bio_url}}
                 <p><a target="_blank" href="{{bio_url}}">Biographical Highlights</a></p>
@@ -244,7 +244,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row person-info-tabs">
         <div class="col-md-10 col-md-push-1">
 
             <!-- Nav tabs -->
@@ -280,7 +280,7 @@
                                     <td align="center">{{vote}}</td>
                                     <td align="center">{{#if_eq did_elected_official_propose_this true}} Yes {{else}} No {{/if_eq}}</td>
                                     <td>{{issue_category_name}}</td>
-                                    <td><img src="img/disqus_icon.png" class="vote" id="{{../../elected_official_id}}_v{{eov_id}}"/></td>
+                                    <td><img src="img/comment.svg" class="vote" id="{{../../elected_official_id}}_v{{eov_id}}" data-legislation-name="{{name}}"/></td>
                                 {{/this}}
                                 </tr>
                             {{/votes}}

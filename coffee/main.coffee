@@ -439,7 +439,10 @@ router.get ':id/:user_id', (req, event) ->
                         $('#dataContainer').css('display':'block');
                         $('.vote').on 'click', (e) ->
                             id = e.currentTarget.id
-                            $('#myModalLabel').text(person.full_name + ' (' + alt_name + ')');
+                            # If legislationName is undefined use person name
+                            name = e.currentTarget.dataset.legislationName
+                            if name is undefined then name = person.full_name
+                            $('#myModalLabel').text(name + ' (' + alt_name + ')');
                             $('#conversation').modal 'show'
                             reset id, 'http://govwiki.us' + '/' + id, id
                     error:(e) ->
